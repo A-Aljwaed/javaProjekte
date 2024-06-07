@@ -1,6 +1,6 @@
-package süßigkeitsLaden;
+package süßigkeitsLaden.ablauf;
 
-public enum Geschlächt {
+public enum Geschlecht {
 
     MAENLICH,
     WEIBLICH,

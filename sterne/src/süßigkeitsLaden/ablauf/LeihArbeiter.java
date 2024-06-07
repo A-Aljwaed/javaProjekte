@@ -9,7 +9,7 @@ public class LeihArbeiter extends Angestellte {
     private String leiFirma;
 
 
-    LeihArbeiter(String neueName, Geschlächt geschlechter, int neueAlter, String firma) {
+    LeihArbeiter(String neueName, Geschlecht geschlechter, int neueAlter, String firma) {
 
         super(neueName, geschlechter, neueAlter);
         this.leiFirma = firma;

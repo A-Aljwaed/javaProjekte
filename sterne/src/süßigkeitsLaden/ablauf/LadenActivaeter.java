@@ -6,29 +6,29 @@ import süßigkeitsLaden.INTERN.Sorte;
 
 import java.util.*;
 
-public class LadenActiväter {
+public class LadenActivaeter {
 
     public static void main(String argumente[]) {
 
 
         LinkedList<Angestellte> arbeiter = new LinkedList<>();
 
-        Angestellte ahmad = new Angestellte("ahmad☻", Geschlächt.MAENLICH, 27);
+        Angestellte ahmad = new Angestellte("ahmad☻", Geschlecht.MAENLICH, 27);
         arbeiter.push(ahmad);
 
 
-        arbeiter.push(new Angestellte("nilo☻", Geschlächt.MAENLICH, 32));
-        arbeiter.push(new Angestellte("Lia☻", Geschlächt.WEIBLICH, 28));
-        arbeiter.push(new Angestellte("Jori☻", Geschlächt.MAENLICH, 19));
-        arbeiter.push(new Angestellte("Karsten☻", Geschlächt.SEHR_MAENLICH, 43));
-        arbeiter.push(new Angestellte("Dani☻", Geschlächt.DIVERS, 25));
+        arbeiter.push(new Angestellte("nilo☻", Geschlecht.MAENLICH, 32));
+        arbeiter.push(new Angestellte("Lia☻", Geschlecht.WEIBLICH, 28));
+        arbeiter.push(new Angestellte("Jori☻", Geschlecht.MAENLICH, 19));
+        arbeiter.push(new Angestellte("Karsten☻", Geschlecht.SEHR_MAENLICH, 43));
+        arbeiter.push(new Angestellte("Dani☻", Geschlecht.DIVERS, 25));
 
 
 
 
 
-        arbeiter.add(new LeihArbeiter("raj", Geschlächt.MAENLICH, 44, "Randstad"));
-        LeihArbeiter adil = new LeihArbeiter("adil", Geschlächt.WEIBLICH, 33, "phantom");
+        arbeiter.add(new LeihArbeiter("raj", Geschlecht.MAENLICH, 44, "Randstad"));
+        LeihArbeiter adil = new LeihArbeiter("adil", Geschlecht.WEIBLICH, 33, "phantom");
 
         arbeiter.add(adil);
 
@@ -37,7 +37,7 @@ public class LadenActiväter {
         }
 
 
-        Süß_Laden süßLaden = new Süß_Laden(arbeiter);
+        Sueß_Laden süßLaden = new Sueß_Laden(arbeiter);
 
         süßLaden.offnen();
 

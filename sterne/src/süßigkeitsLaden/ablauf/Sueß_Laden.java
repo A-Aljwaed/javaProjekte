@@ -1,11 +1,11 @@
-package süßigkeitsLaden.Mitarbeiter;
+package süßigkeitsLaden.ablauf;
 
 import java.util.Date;
 import java.util.LinkedList;
 
-import static süßigkeitsLaden.Mitarbeiter.Geschlächt.*;
+import static süßigkeitsLaden.ablauf.Geschlecht.*;
 
-class Süß_Laden {
+class Sueß_Laden {
 
 
     private Date offnungszeit;
@@ -13,9 +13,17 @@ class Süß_Laden {
     private LinkedList<Angestellte> arbeiterteam;
 
 
-    Süß_Laden(LinkedList<Angestellte> dasTeam) {
-
-        this.setArbeiterteam(dasTeam);
+    Sueß_Laden(LinkedList<Angestellte> dasTeam) {
+if (dasTeam.isEmpty()){
+    throw new IllegalArgumentException("bitte bereiten Sie einen Team vor");
+}else if(dasTeam.size()>11){
+    try {
+        throw new IllegalArgumentException("komisch !!! es sind mehr Mitarbeiter als nötig da!!!");
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+        }else{
+        this.setArbeiterteam(dasTeam);}
 
         for (Angestellte an : dasTeam) {
             if (an.getGeschlecht().equalsIgnoreCase(WEIBLICH.getName())) {
@@ -35,12 +43,10 @@ class Süß_Laden {
         this.arbeiterteam = arbeiterteam;
     }
 
-    public String getOffnungszeit() {
+    public void getOffnungszeit() {
 
-        return "laden wurde am |||||||||" + offnungszeit + "  |||||||||||||| geöffnet";
+        System.out.println("laden wurde am |||||||||" + offnungszeit + "  |||||||||||||| geöffnet");
     }
-
-
 
 
     protected void offnen() {

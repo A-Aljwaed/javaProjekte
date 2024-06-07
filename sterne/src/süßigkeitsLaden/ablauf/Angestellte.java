@@ -1,11 +1,6 @@
 package süßigkeitsLaden.ablauf;
 
-import süßigkeitsLaden.Mitarbeiter.Breisbar;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.util.LinkedList;
 
 public class Angestellte {
 
@@ -29,16 +24,16 @@ public class Angestellte {
         return geschlecht.getName();
     }
 
-    private void setGeschlecht(Geschlächt geschlecht) {
+    private void setGeschlecht(Geschlecht geschlecht) {
         this.geschlecht = geschlecht;
     }
 
     private String name;
     private int alter;
-    private Geschlächt geschlecht;
+    private Geschlecht geschlecht;
 
 
-    Angestellte(String neueName, Geschlächt geschlechter, int neueAlter) {
+    Angestellte(String neueName, Geschlecht geschlechter, int neueAlter) {
 
         if (neueName.matches("[\\p{Alpha}]{2,20}[\\D]")) {
             this.setName(neueName);

@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffb8d73e-f3bc-4f15-b864-05a8a4816906" name="Changes" comment="" />
+    <list default="true" id="ffb8d73e-f3bc-4f15-b864-05a8a4816906" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Angestellte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Geschlächt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/LadenActiväter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/LeihArbeiter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Mitarbeiter/Angestellte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Mitarbeiter/Breisbar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Mitarbeiter/Geschlächt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Mitarbeiter/LadenActiväter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Mitarbeiter/LeihArbeiter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Mitarbeiter/Suesse_Sorten.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Mitarbeiter/Süß_Laden.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Suesse_Sorten.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/Süß_Laden.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/Angestellte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/Angestellte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/Geschlächt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/Geschlecht.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/LadenActiväter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/LadenActivaeter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/LeihArbeiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/LeihArbeiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/Süß_Laden.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/süßigkeitsLaden/ablauf/Sueß_Laden.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +38,21 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "A-Aljwaed"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/A-Aljwaed/javaProjekte.git",
+    "accountId": "adcc9d20-1709-40c6-8ce4-da32ea214f5e"
+  }
+}]]></component>
   <component name="ProblemsViewState">
     <hideBySeverity>
       <option value="11" />
@@ -51,8 +85,9 @@
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/AALJ199/Desktop/sterne",
+    "last_opened_file_path": "C:/Users/ahmad/Desktop/GIT-PROJEKT/sterne",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
