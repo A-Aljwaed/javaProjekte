@@ -1,7 +1,16 @@
 package süßigkeitsLaden;
 
+import jdk.jfr.Timestamp;
+
+import javax.swing.*;
+import java.io.IOException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.SortedSet;
+import java.sql.DriverManager;
 
 public class Angestellte {
 
@@ -36,33 +45,60 @@ public class Angestellte {
 
     Angestellte(String neueName, Geschlächt geschlechter, int neueAlter) {
 
+        if (neueName.matches("[\\w]+[\\D]")) {
+            this.setName(neueName);
+        } else {
+            throw new IllegalArgumentException("bitte überprüfen Sie Mitarbeiter Namen");
+        }
+
+
         if (neueAlter < 18) {
 
-                throw new IllegalArgumentException("mitarbeiter darf nicht unter 18 sein");
+            throw new IllegalArgumentException("mitarbeiter darf nicht unter 18 sein");
 
-            }
+        } else if (neueAlter > 68) {
 
-        else if (neueAlter > 68) {
-
-                throw new IllegalArgumentException("mitarbeiter hat Rentenalter erreicht !");
+            throw new IllegalArgumentException("mitarbeiter hat Rentenalter erreicht !");
 
         } else {
             this.setAlter(neueAlter);
             this.setGeschlecht(geschlechter);
-            this.setName(neueName);
+
         }
     }
 
 
-    protected void verkaufe(HashSet<Suesse_Sorten> suesseSorten, Angestellte angestellte) {
-        Integer rechnung = 0;
-        for (Suesse_Sorten ss : suesseSorten) {
+    protected void verkaufe(Suesse_Sorten... suesseSortens) {
+        Double rechnung1 = 0.0;
 
-            System.out.println(this.getName() + " hat " + ss.getName() + " für " + ss.getPreis() + " € verkauft");
-            rechnung += ss.getPreis();
+        for (Suesse_Sorten sss : suesseSortens) {
+            System.out.println(this.getName() + " hat " + sss + " für " + sss.getPreis() + " € verkauft");
+            rechnung1 += sss.getPreis();
         }
-        System.out.println("Rechnung Betrag " + rechnung + " €");
+        System.out.println("Rechnung Betrag " + rechnung1 + " €");
+
+        String abfrage = "insert into MitarbeiterDaten values(?,?) ";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/MitarbeiterDaten", "root", "");
+
+            PreparedStatement st = connection.prepareStatement(abfrage);
+            st.setString(1, this.getName());
+            st.setDouble(2, rechnung1);
+            st.executeUpdate();
+
+            st.close();
+            connection.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
-
+    public String toString() {
+        return this.getName();
+    }
 }
