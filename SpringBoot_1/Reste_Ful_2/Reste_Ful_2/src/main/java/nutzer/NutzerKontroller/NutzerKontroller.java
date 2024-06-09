@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import schnittstellen.UserReposetory;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/nutzer")
-
+@RequestMapping("/Nutzer")
 public class NutzerKontroller {
 
 
@@ -26,7 +26,7 @@ public class NutzerKontroller {
 
     }
 
-        @GetMapping("/{id")
+        @GetMapping("/{id}")
         Nutzer getNutzer (@PathVariable String id){
         return userReposetory.findById(id).orElse(null);
     }
@@ -48,7 +48,7 @@ public class NutzerKontroller {
     }
 
 
-        @DeleteMapping("{id")
+        @DeleteMapping("{id}")
         String dleteNutzer (@PathVariable String id){
 
         userReposetory.findById(id);
