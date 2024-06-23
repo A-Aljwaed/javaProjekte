@@ -1,6 +1,9 @@
 package süßigkeitsLaden.ablauf;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class Angestellte {
 
@@ -77,24 +80,24 @@ public class Angestellte {
         }
         System.out.println("Rechnung Betrag " + rechnung1 + " €");
 
-//        String abfrage = "insert into MitarbeiterDaten values(?,?) ";
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//
-//
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/MitarbeiterDaten", "root", "");
-//
-//            PreparedStatement st = connection.prepareStatement(abfrage);
-//            st.setString(1, this.getName());
-//            st.setDouble(2, rechnung1);
-//            st.executeUpdate();
-//
-//            st.close();
-//            connection.close();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        String abfrage = "insert into MitarbeiterDaten (mitarbeitername,umsatz) values(?,?) ";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/MitarbeiterDaten", "root", "");
+
+            PreparedStatement st = connection.prepareStatement(abfrage);
+            st.setString(1, this.getName());
+            st.setDouble(2, rechnung1);
+            st.executeUpdate();
+
+            st.close();
+            connection.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

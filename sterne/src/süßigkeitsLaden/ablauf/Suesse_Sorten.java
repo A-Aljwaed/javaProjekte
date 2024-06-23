@@ -1,6 +1,6 @@
 package süßigkeitsLaden.ablauf;
 
-import süßigkeitsLaden.Mitarbeiter.Breisbar;
+import süßigkeitsLaden.ablauf.Breisbar;
 
 public enum Suesse_Sorten implements Breisbar {
 

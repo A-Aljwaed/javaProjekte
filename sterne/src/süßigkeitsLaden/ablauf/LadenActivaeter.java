@@ -59,8 +59,8 @@ public class LadenActivaeter {
         k.fueleBohne(70);
 
 
-//        adil.arbeitszeit();
-//        Date l = new Date();
-//        System.out.println(l);
+        adil.arbeitszeit();
+        Date l = new Date();
+        System.out.println(l);
     }
 }

@@ -1,6 +1,6 @@
 package süßigkeitsLaden.INTERN;
 
-import süßigkeitsLaden.Mitarbeiter.Breisbar;
+import süßigkeitsLaden.ablauf.Breisbar;
 
 public enum Softdrinks_sorte implements Breisbar {
 

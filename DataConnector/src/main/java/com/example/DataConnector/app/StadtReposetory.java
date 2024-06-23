@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface StadtReposetory extends CrudRepository <Citys, Long>
 {
 
-
+Citys findByName(String name);
 
 
 }
