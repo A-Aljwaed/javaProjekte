@@ -21,7 +21,7 @@ public class LadenActivaeter {
         arbeiter.push(new Angestellte("Lia☻", Geschlecht.WEIBLICH, 28));
         arbeiter.push(new Angestellte("Jori☻", Geschlecht.MAENLICH, 19));
         arbeiter.push(new Angestellte("Karsten☻", Geschlecht.SEHR_MAENLICH, 43));
-        arbeiter.push(new Angestellte("Dani☻", Geschlecht.DIVERS, 25));
+
 
 
 
