@@ -1,7 +1,10 @@
 
 import com.Daten_Bank_Verbindung;
+import static com.Daten_Bank_Verbindung.verbindung;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 
@@ -32,11 +35,11 @@ public class signUpSeite extends javax.swing.JFrame {
 
         // im try catch befindet sich das Driver für jdbc was in mysql-connecter ist
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+           // Class.forName("com.mysql.jdbc.Driver");
             // Verbindung Aufbau                                                               
             Connection verbindung = Daten_Bank_Verbindung.getConnection();
             //   diese Abfrage wird an DB gexhickt die ? zeichen sind Platzhalter f
-            String sqlAbfrage = "insert into nutzer(name,PASSWORD,email,contact) valuOf(?,?,?,?)";
+            String sqlAbfrage = "insert into nutzer(name,PASSWORD,email,contact) values(?,?,?,?)";
             PreparedStatement pst = verbindung.prepareStatement(sqlAbfrage);
             // in den statment werden mittels den Platzhalter die Werte übertragen
             pst.setString(1, name);
@@ -48,6 +51,9 @@ public class signUpSeite extends javax.swing.JFrame {
             int beeinflussteSpalten = pst.executeUpdate();
             if (beeinflussteSpalten > 0) {
                 JOptionPane.showMessageDialog(this, "  Eingabe wurde erfolgreich durchgeführt");
+                LoginSeite lgs=new LoginSeite();
+                lgs.setVisible(true);
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "  Eingabe fehlgeschlagen");
             }
@@ -56,7 +62,60 @@ public class signUpSeite extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }}
+//validieren 
+    public boolean validesRegistrieren(){
+          String name = nutzername.getText();
+        String passwort = passwortFeld.getText();
+        String e_Mail = eMailFeld.getText();
+        String kontakt = handyFeld.getText();
 
+        if (name.equals("")){
+            JOptionPane.showMessageDialog(this,"Bitte geben Sie eine Gülltige Nutzername ein");
+return false;  
+        
+        }      if (passwort.equals("")){
+            JOptionPane.showMessageDialog(this,"Bitte geben Sie eine Gülltiges Passwort ein");
+return false;  
+        
+        }      if (e_Mail.equals("")|| !e_Mail.matches("^.+@.+\\..+$")){
+            JOptionPane.showMessageDialog(this,"Bitte geben Sie eine Gülltige EmailAdresse ein");
+return false;  
+        
+        }      if (kontakt.equals("")){
+            JOptionPane.showMessageDialog(this,"Bitte geben Sie eine Gülltige Handynummer ein");
+return false;  
+        
+        }
+        return true;
+        
+    }
+    
+    // Redundanz Prüfen
+    //schickt eine SQL abfrage um zu pruefen ob der Nuzer schon vorliegt
+    public boolean pruefeRedundanz(){
+        
+       String name = nutzername.getText();
+       boolean vorhanden=false;
+       try{
+        Connection verbindung= DriverManager.getConnection("jdbc:mysql://localhost:3306/bucherei_ms","root","");
+        PreparedStatement pst=verbindung.prepareCall("select * from nutzer where name= ?");
+        pst.setString(1, name);
+        ResultSet ergebniss = pst.executeQuery();
+
+if(ergebniss.next()){
+vorhanden=true;}
+else {
+    vorhanden =false;
+}
+       }
+       
+       catch(Exception e){
+           e.printStackTrace();
+       }
+        
+    return vorhanden;    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,6 +160,7 @@ public class signUpSeite extends javax.swing.JFrame {
         eMailFeld = new app.bolivia.swing.JCTextField();
         passwortFeld = new app.bolivia.swing.JCTextField();
         handyFeld = new app.bolivia.swing.JCTextField();
+        jLabel19 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -189,6 +249,7 @@ public class signUpSeite extends javax.swing.JFrame {
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -212,7 +273,6 @@ public class signUpSeite extends javax.swing.JFrame {
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\ahmad\\Documents\\NetBeansProjects\\bucherei_40\\src\\main\\jFrame\\icons\\signup-library-icon.png")); // NOI18N
-        jLabel3.setText("jLabel3");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 920, 750));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 800));
@@ -220,10 +280,15 @@ public class signUpSeite extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(153, 153, 255));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel9.setText("Haben Sie keinen Konto");
-        jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 170, -1));
+        jLabel9.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(188, 91, 91));
+        jLabel9.setText("X");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 20, -1));
 
         jLabel10.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
@@ -260,6 +325,11 @@ public class signUpSeite extends javax.swing.JFrame {
 
         rSMaterialButtonCircle1.setBackground(new java.awt.Color(0, 145, 151));
         rSMaterialButtonCircle1.setText("Registrieren");
+        rSMaterialButtonCircle1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonCircle1ActionPerformed(evt);
+            }
+        });
         jPanel9.add(rSMaterialButtonCircle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 280, 60));
 
         rSMaterialButtonCircle2.setText("Einlogen");
@@ -272,6 +342,11 @@ public class signUpSeite extends javax.swing.JFrame {
 
         nutzername.setBackground(new java.awt.Color(153, 153, 255));
         nutzername.setPlaceholder("bitte geben Sie Ihen Name ein");
+        nutzername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nutzernameFocusLost(evt);
+            }
+        });
         jPanel9.add(nutzername, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
 
         eMailFeld.setBackground(new java.awt.Color(153, 153, 255));
@@ -291,7 +366,12 @@ public class signUpSeite extends javax.swing.JFrame {
         handyFeld.setPlaceholder("geben Sie Ihre Handy Nummer");
         jPanel9.add(handyFeld, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, -1, -1));
 
-        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 0, 390, 800));
+        jLabel19.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel19.setText("Haben Sie keinen Konto");
+        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 170, -1));
+
+        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 0, 370, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -303,6 +383,26 @@ public class signUpSeite extends javax.swing.JFrame {
     private void passwortFeldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwortFeldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwortFeldActionPerformed
+
+    private void rSMaterialButtonCircle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonCircle1ActionPerformed
+if(validesRegistrieren()==true){  
+    if(pruefeRedundanz()==false){
+                             signUpEingabe(); }     }     
+else{
+    JOptionPane.showConfirmDialog(this, "Nutzername liegt schon vor!!!");
+} 
+    }//GEN-LAST:event_rSMaterialButtonCircle1ActionPerformed
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        System.exit(0);
+        
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void nutzernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nutzernameFocusLost
+       if(pruefeRedundanz()==true){
+           JOptionPane.showConfirmDialog(this, "die Name liegt schon vor");
+       }
+    }//GEN-LAST:event_nutzernameFocusLost
 
     /**
      * @param args the command line arguments
@@ -355,6 +455,7 @@ public class signUpSeite extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -255,7 +255,7 @@ public class LoginSeite extends javax.swing.JFrame {
         jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\ahmad\\Documents\\NetBeansProjects\\bucherei_40\\src\\main\\jFrame\\adminIcons\\male_user_50px.png")); // NOI18N
-        jPanel9.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 50, 40));
+        jPanel9.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 50, 40));
 
         jLabel12.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         jLabel12.setText("Nutzer-Name");
