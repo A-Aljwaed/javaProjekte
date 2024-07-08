@@ -1,8 +1,8 @@
 package süßigkeitsLaden.ablauf;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
+import java.time.LocalTime;
 
 public class LeihArbeiter extends Angestellte {
 
@@ -15,24 +15,23 @@ public class LeihArbeiter extends Angestellte {
         this.leiFirma = firma;
     }
 
-    protected Long zeitStaembel() {
+    protected LocalTime zeitStaembel() {
 
-        java.util.Date date = new Date();
+        LocalTime lt1= LocalTime.now();
 
         long zeit = date.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(" mitarbeiter " + this.getName() + " hat gestaembelt " + formatter.format(zeit));
-        return zeit;
+        return lt1;
     }
 
-    protected Long AbStaembel() {
+    protected LocalTime AbStaembel() {
 
-        java.util.Date date = new Date();
-
+        LocalTime lt= LocalTime.now();
         long zeit = date.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(" mitarbeiter " + this.getName() + " hat gestaembelt " + formatter.format(zeit));
-        return zeit;
+        System.out.println(" mitarbeiter " + this.getName() + " hat gestaembelt " + lt);
+        return lt;
     }
 
     protected void arbeitszeit() {

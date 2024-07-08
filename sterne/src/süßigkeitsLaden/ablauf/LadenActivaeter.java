@@ -4,6 +4,7 @@ import süßigkeitsLaden.INTERN.KAFFEE;
 import süßigkeitsLaden.INTERN.Softdrinks_sorte;
 import süßigkeitsLaden.INTERN.Sorte;
 
+import java.time.LocalTime;
 import java.util.*;
 
 public class LadenActivaeter {
@@ -59,8 +60,8 @@ public class LadenActivaeter {
         k.fueleBohne(70);
 
 
-        adil.arbeitszeit();
-        Date l = new Date();
-        System.out.println(l);
+//        adil.arbeitszeit();
+      adil.zeitStaembel();
+      adil.AbStaembel();
     }
 }
