@@ -23,7 +23,7 @@ import webit.script.core.ast.Statment;
  *
  * @author ahmad
  */
-public class Bestandverwalten extends javax.swing.JFrame {
+public class MitarbeiterVerwaltung extends javax.swing.JFrame {
 
     /**
      * Creates new form Buecherverwalten
@@ -32,32 +32,32 @@ public class Bestandverwalten extends javax.swing.JFrame {
   
     DefaultTableModel model;
     
-    public Bestandverwalten() {
+    public MitarbeiterVerwaltung() {
         initComponents();
-        setProdujtDeteilsToTable();
+        setMitarbeiterDeteilsToTable();
     }
 
     
     // um bucher in die Tabelle einzutragen
-    public void setProdujtDeteilsToTable(){
+    public void setMitarbeiterDeteilsToTable(){
           try {
            // Class.forName("com.mysql.jdbc.Driver");
             // Verbindung Aufbau                                                               
           
           Connection verbindung= DriverManager.getConnection("jdbc:mysql://localhost:3306/Lager_ms","root","");
           Statement st=verbindung.createStatement();
-       ResultSet rs= st.executeQuery("select * from lager_deteils");
+       ResultSet rs= st.executeQuery("select * from mitarbeiter_daten");
        
        
        while(rs.next()){
-           String ReifenID=rs.getString("reifen_id");
-           int Durchmesser=rs.getInt("durchmesser");
-           String Hersteller=rs.getString("Hersteller");
-           int menge=rs.getInt("menge");
+           String mitabeiterID=rs.getString("mitarbeiterID");
+           String name=rs.getString("mitarbeitername");
+           String halle=rs.getString("halle");
+           String abteilung=rs.getString("abteilung");
            
-           Object obj[]={ReifenID,Durchmesser,Hersteller,menge};
+           Object obj[]={mitabeiterID,name,halle,abteilung};
            
-           model=(DefaultTableModel) tabelle_producktDeteils.getModel();
+           model=(DefaultTableModel) tabelle_mitarbeiterDeteils.getModel();
            
            model.addRow(obj);
            
@@ -68,11 +68,11 @@ public class Bestandverwalten extends javax.swing.JFrame {
           }
         
     }
-    public void produktEingabe() {
-        String reifen_id = reifenID.getText();
-       int durchMesser = Integer.parseInt(durchmesser.getText());
-        String herSteller = hersteller.getText();
-        int Menge  =Integer.parseInt(reifenmenge.getText());
+    public void mitarbeiterEingabe() {
+        String mitarbeiter_id = mitarbeiterID.getText();
+       String mitarbeiterName = mitarbeitername.getText();
+        String halle1  = halle.getSelectedItem().toString();
+   String abteilung1=abteilung.getSelectedItem().toString();
 
         // im try catch befindet sich das Driver für jdbc was in mysql-connecter ist
         try {
@@ -80,13 +80,13 @@ public class Bestandverwalten extends javax.swing.JFrame {
             // Verbindung Aufbau                                                               
             Connection verbindung = Daten_Bank_Verbindung.getConnection();
             //   diese Abfrage wird an DB gexhickt die ? zeichen sind Platzhalter f
-            String sqlAbfrage = "insert into lager_deteils(reifen_id,durchmesser,Hersteller,menge) values(?,?,?,?)";
+            String sqlAbfrage = "insert into mitarbeiter_daten(mitarbeiterid,mitarbeitername,halle,abteilung) values(?,?,?,?)";
             PreparedStatement pst = verbindung.prepareStatement(sqlAbfrage);
             // in den statment werden mittels den Platzhalter die Werte übertragen
-            pst.setString(1, reifen_id);
-            pst.setInt(2, durchMesser);
-            pst.setString(3, herSteller);
-            pst.setInt(4, Menge);
+            pst.setString(1, mitarbeiter_id);
+            pst.setString(2, mitarbeiterName);
+            pst.setString(3, halle1);
+            pst.setString(4, abteilung1);
 
             // das zeigt die Spalten die von den Statment beeinflusst wurden
             int beeinflussteSpalten = pst.executeUpdate();
@@ -105,14 +105,14 @@ public class Bestandverwalten extends javax.swing.JFrame {
     
        public void loechen(){
         
-           String id=reifenID.getText();
-        String herSteller=hersteller.getText();
+           String id=mitarbeiterID.getText();
+        String mitarbeitername1=mitarbeitername.getText();
         try {
                 Connection verbindung= DriverManager.getConnection("jdbc:mysql://localhost:3306/lager_ms","root","");
-                PreparedStatement pst=verbindung.prepareStatement("delete from lager_deteils where reifen_id = ? and Hersteller = ?");
+                PreparedStatement pst=verbindung.prepareStatement("delete from mitarbeiter_daten where mitarbeiterid = ? and mitarbeitername = ?");
                 
                 pst.setString(1, id);
-                pst.setString(2, herSteller);
+                pst.setString(2, mitarbeitername1);
                 
                 ResultSet rs=pst.executeQuery();
                 if(rs.next()){
@@ -130,10 +130,11 @@ public class Bestandverwalten extends javax.swing.JFrame {
     
        
    public void aktualisieren() {
-        String Reifen_id = reifenID.getText();
-       int durchMesser = Integer.parseInt(durchmesser.getText());
-        String herSteller = hersteller.getText();
-        int Menge  =Integer.parseInt(reifenmenge.getText());
+        String mitarbeiter_id = mitarbeiterID.getText();
+       String mitarbeiterName = mitarbeitername.getText();
+        String halle1  = halle.getSelectedItem().toString();
+   String abteilung1=abteilung.getSelectedItem().toString();
+
 
         // im try catch befindet sich das Driver für jdbc was in mysql-connecter ist
         try {
@@ -141,13 +142,13 @@ public class Bestandverwalten extends javax.swing.JFrame {
             // Verbindung Aufbau                                                               
             Connection verbindung = Daten_Bank_Verbindung.getConnection();
             //   diese Abfrage wird an DB gexhickt die ? zeichen sind Platzhalter f
-            String sqlAbfrage = "update lager_deteils set durchmesser=?,Hersteller=?,menge=? where reifen_id=? ";
+            String sqlAbfrage = "update mitarbeiter_daten set mitarbeitername=?,abteilung=?,halle=? where mitarbeiterid=? ";
             PreparedStatement pst = verbindung.prepareStatement(sqlAbfrage);
             // in den statment werden mittels den Platzhalter die Werte übertragen
-            pst.setString(4, Reifen_id);
-            pst.setInt(1, durchMesser);
-            pst.setString(2, herSteller);
-            pst.setInt(3, Menge);
+            pst.setString(4, mitarbeiter_id);
+            pst.setString(1, mitarbeiterName);
+            pst.setString(2, abteilung1);
+            pst.setString(3, halle1);
 
             // das zeigt die Spalten die von den Statment beeinflusst wurden
             int beeinflussteSpalten = pst.executeUpdate();
@@ -176,24 +177,24 @@ public class Bestandverwalten extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        reifenID = new app.bolivia.swing.JCTextField();
+        mitarbeiterID = new app.bolivia.swing.JCTextField();
         jLabel14 = new javax.swing.JLabel();
-        durchmesser = new app.bolivia.swing.JCTextField();
         jLabel16 = new javax.swing.JLabel();
-        hersteller = new app.bolivia.swing.JCTextField();
         jLabel18 = new javax.swing.JLabel();
-        reifenmenge = new app.bolivia.swing.JCTextField();
+        mitarbeitername = new app.bolivia.swing.JCTextField();
         rSMaterialButtonCircle3 = new necesario.RSMaterialButtonCircle();
         rSMaterialButtonCircle4 = new necesario.RSMaterialButtonCircle();
         rSMaterialButtonCircle5 = new necesario.RSMaterialButtonCircle();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        abteilung = new javax.swing.JComboBox<>();
+        halle = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelle_producktDeteils = new rojeru_san.complementos.RSTableMetro();
+        tabelle_mitarbeiterDeteils = new rojeru_san.complementos.RSTableMetro();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
 
@@ -238,53 +239,40 @@ public class Bestandverwalten extends javax.swing.JFrame {
         jLabel12.setText("    ID eingeben");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 100, -1));
 
-        reifenID.setBackground(new java.awt.Color(255, 102, 102));
-        reifenID.setPlaceholder("bitte Serienummer  eingeben");
-        reifenID.addFocusListener(new java.awt.event.FocusAdapter() {
+        mitarbeiterID.setBackground(new java.awt.Color(255, 102, 102));
+        mitarbeiterID.setPlaceholder("bitte MitarbeiterID  eingeben");
+        mitarbeiterID.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                reifenIDFocusLost(evt);
+                mitarbeiterIDFocusLost(evt);
             }
         });
-        jPanel1.add(reifenID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 270, -1));
+        mitarbeiterID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitarbeiterIDActionPerformed(evt);
+            }
+        });
+        jPanel1.add(mitarbeiterID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 270, -1));
 
         jLabel14.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jLabel14.setText("Durchmesser");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 80, -1));
-
-        durchmesser.setBackground(new java.awt.Color(255, 102, 102));
-        durchmesser.setPlaceholder("bitte geben Sie das Durchmesser ein");
-        durchmesser.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                durchmesserFocusLost(evt);
-            }
-        });
-        jPanel1.add(durchmesser, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 270, -1));
+        jLabel14.setText("Mitarbeiter name");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 100, -1));
 
         jLabel16.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jLabel16.setText("Hersteller");
+        jLabel16.setText("Halle");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 80, -1));
 
-        hersteller.setBackground(new java.awt.Color(255, 102, 102));
-        hersteller.setPlaceholder("bitte geben Sie  Name des Herstellers ein");
-        hersteller.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                herstellerFocusLost(evt);
-            }
-        });
-        jPanel1.add(hersteller, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 270, -1));
-
         jLabel18.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
-        jLabel18.setText("Menge");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 80, -1));
+        jLabel18.setText("Abteilung");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 80, -1));
 
-        reifenmenge.setBackground(new java.awt.Color(255, 102, 102));
-        reifenmenge.setPlaceholder("bitte geben Sie die Menge ein");
-        reifenmenge.addFocusListener(new java.awt.event.FocusAdapter() {
+        mitarbeitername.setBackground(new java.awt.Color(255, 102, 102));
+        mitarbeitername.setPlaceholder("Mitarbeiter name");
+        mitarbeitername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                reifenmengeFocusLost(evt);
+                mitarbeiternameFocusLost(evt);
             }
         });
-        jPanel1.add(reifenmenge, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 270, -1));
+        jPanel1.add(mitarbeitername, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 270, -1));
 
         rSMaterialButtonCircle3.setBackground(new java.awt.Color(51, 0, 0));
         rSMaterialButtonCircle3.setText("Hinfügen");
@@ -331,6 +319,26 @@ public class Bestandverwalten extends javax.swing.JFrame {
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 40, 40));
         jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 40, 40));
 
+        abteilung.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        abteilung.setForeground(new java.awt.Color(255, 255, 255));
+        abteilung.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beschaffung", "Logistic", "Lager", " " }));
+        abteilung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abteilungActionPerformed(evt);
+            }
+        });
+        jPanel1.add(abteilung, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 290, 40));
+
+        halle.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        halle.setForeground(new java.awt.Color(255, 255, 255));
+        halle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D" }));
+        halle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                halleActionPerformed(evt);
+            }
+        });
+        jPanel1.add(halle, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 290, 40));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 820));
 
         jPanel3.setBackground(new java.awt.Color(255, 153, 153));
@@ -365,28 +373,29 @@ public class Bestandverwalten extends javax.swing.JFrame {
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, -1, -1));
 
-        tabelle_producktDeteils.setModel(new javax.swing.table.DefaultTableModel(
+        tabelle_mitarbeiterDeteils.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "reifenID", "Durchmesser", "Hersteller", "Menge"
+                "MitarbeiterID", "name", "Halle", "Abteilung"
             }
         ));
-        tabelle_producktDeteils.setColorBackgoundHead(new java.awt.Color(255, 51, 51));
-        tabelle_producktDeteils.setRowHeight(40);
-        tabelle_producktDeteils.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelle_mitarbeiterDeteils.setColorBackgoundHead(new java.awt.Color(255, 51, 51));
+        tabelle_mitarbeiterDeteils.setRowHeight(40);
+        tabelle_mitarbeiterDeteils.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelle_producktDeteilsMouseClicked(evt);
+                tabelle_mitarbeiterDeteilsMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelle_producktDeteils);
+        jScrollPane1.setViewportView(tabelle_mitarbeiterDeteils);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 700, 220));
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel3.setText("Bestand Verwalten");
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\ahmad\\Desktop\\GIT-PROJEKT\\SihleProject\\Siehle\\src\\main\\jFrame\\adminIcons\\icons8_People_50px.png")); // NOI18N
+        jLabel3.setText("Mitarbeiter Verwalten");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
 
         jPanel5.setBackground(new java.awt.Color(204, 0, 0));
@@ -410,21 +419,13 @@ public class Bestandverwalten extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void reifenIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reifenIDFocusLost
+    private void mitarbeiterIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mitarbeiterIDFocusLost
 
-    }//GEN-LAST:event_reifenIDFocusLost
+    }//GEN-LAST:event_mitarbeiterIDFocusLost
 
-    private void durchmesserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_durchmesserFocusLost
+    private void mitarbeiternameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mitarbeiternameFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_durchmesserFocusLost
-
-    private void herstellerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_herstellerFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_herstellerFocusLost
-
-    private void reifenmengeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reifenmengeFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reifenmengeFocusLost
+    }//GEN-LAST:event_mitarbeiternameFocusLost
 
     private void rSMaterialButtonCircle3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonCircle3ActionPerformed
         // TODO add your handling code here:
@@ -444,33 +445,33 @@ System.exit(0);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void tabelle_producktDeteilsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelle_producktDeteilsMouseClicked
-int rowNo=tabelle_producktDeteils.getSelectedRow();
-TableModel model=tabelle_producktDeteils.getModel();
+    private void tabelle_mitarbeiterDeteilsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelle_mitarbeiterDeteilsMouseClicked
+int rowNo=tabelle_mitarbeiterDeteils.getSelectedRow();
+TableModel model=tabelle_mitarbeiterDeteils.getModel();
 
-reifenID.setText(model.getValueAt(rowNo, 0).toString());
-durchmesser.setText(model.getValueAt(rowNo, 1).toString());
-hersteller.setText(model.getValueAt(rowNo, 2).toString());
-reifenmenge.setText(model.getValueAt(rowNo, 3).toString());
+mitarbeiterID.setText(model.getValueAt(rowNo, 0).toString());
+mitarbeitername.setText(model.getValueAt(rowNo, 1).toString());
+halle.setToolTipText(model.getValueAt(rowNo, 2).toString());
+abteilung.setToolTipText(model.getValueAt(rowNo, 3).toString());
         // TODO add your handling code here:
-    }//GEN-LAST:event_tabelle_producktDeteilsMouseClicked
+    }//GEN-LAST:event_tabelle_mitarbeiterDeteilsMouseClicked
 
     private void rSMaterialButtonCircle3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSMaterialButtonCircle3MouseClicked
-     produktEingabe();
-     new Bestandverwalten().setVisible(true);
+     mitarbeiterEingabe();
+     new MitarbeiterVerwaltung().setVisible(true);
 this.dispose();
         
     }//GEN-LAST:event_rSMaterialButtonCircle3MouseClicked
 
     private void rSMaterialButtonCircle5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSMaterialButtonCircle5MouseClicked
 loechen();  
-new Bestandverwalten().setVisible(true);
+new MitarbeiterVerwaltung().setVisible(true);
 this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_rSMaterialButtonCircle5MouseClicked
 
     private void rSMaterialButtonCircle4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSMaterialButtonCircle4MouseClicked
 aktualisieren();
-new Bestandverwalten().setVisible(true);
+new MitarbeiterVerwaltung().setVisible(true);
 this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_rSMaterialButtonCircle4MouseClicked
 
@@ -479,6 +480,18 @@ this.dispose();// TODO add your handling code here:
          hm.setVisible(true);
 this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void mitarbeiterIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitarbeiterIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mitarbeiterIDActionPerformed
+
+    private void abteilungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abteilungActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_abteilungActionPerformed
+
+    private void halleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_halleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_halleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -511,14 +524,14 @@ this.dispose();// TODO add your handling code here:
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Bestandverwalten().setVisible(true);
+                new MitarbeiterVerwaltung().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private app.bolivia.swing.JCTextField durchmesser;
-    private app.bolivia.swing.JCTextField hersteller;
+    private javax.swing.JComboBox<String> abteilung;
+    private javax.swing.JComboBox<String> halle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -536,11 +549,11 @@ this.dispose();// TODO add your handling code here:
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private app.bolivia.swing.JCTextField mitarbeiterID;
+    private app.bolivia.swing.JCTextField mitarbeitername;
     private necesario.RSMaterialButtonCircle rSMaterialButtonCircle3;
     private necesario.RSMaterialButtonCircle rSMaterialButtonCircle4;
     private necesario.RSMaterialButtonCircle rSMaterialButtonCircle5;
-    private app.bolivia.swing.JCTextField reifenID;
-    private app.bolivia.swing.JCTextField reifenmenge;
-    private rojeru_san.complementos.RSTableMetro tabelle_producktDeteils;
+    private rojeru_san.complementos.RSTableMetro tabelle_mitarbeiterDeteils;
     // End of variables declaration//GEN-END:variables
 }

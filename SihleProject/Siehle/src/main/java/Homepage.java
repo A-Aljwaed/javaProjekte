@@ -21,6 +21,9 @@ public class Homepage extends javax.swing.JFrame {
     /**
      * Creates new form Homepage
      */
+    
+    Color mousEnterClick = new Color(0,0,0);
+    Color mousExitColor = new Color(51,51,51);
     public Homepage() {
         initComponents();
         showPieChart();
@@ -205,18 +208,29 @@ public class Homepage extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel7MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel7MouseExited(evt);
+            }
         });
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\ahmad\\Desktop\\ihleProject\\uniroyal-tyre-size-black.jpg")); // NOI18N
         jLabel8.setText("Bestand Verwalten");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel8MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel8MouseExited(evt);
+            }
         });
-        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 10, 250, 20));
+        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 180, 20));
 
         jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 340, 40));
 
@@ -226,6 +240,14 @@ public class Homepage extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\ahmad\\Documents\\NetBeansProjects\\bucherei_40\\src\\main\\jFrame\\adminIcons\\icons8_Read_Online_26px.png")); // NOI18N
         jLabel9.setText("Mitarbeiter verwlaten");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel9MouseExited(evt);
+            }
+        });
         jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
         jLabel9.getAccessibleContext().setAccessibleName("Mitarbeiter  verwlaten");
 
@@ -486,8 +508,35 @@ System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-new Bestandverwalten().setVisible(true);        // TODO add your handling code here:
+new Bestandverwalten().setVisible(true); 
+  // TODO add your handling code here:
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel7MouseEntered
+
+    private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
+      // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel7MouseExited
+
+    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
+jPanel8.setBackground(mousEnterClick);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9MouseEntered
+
+    private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
+jPanel8.setBackground(mousExitColor);           // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9MouseExited
+
+    private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
+jPanel7.setBackground(mousEnterClick);          // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8MouseEntered
+
+    private void jLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseExited
+jPanel7.setBackground(mousExitColor);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8MouseExited
 
     /**
      * @param args the command line arguments
