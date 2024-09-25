@@ -1,1 +1,13 @@
 # javaProjekte
+RestAbschluss : mittels SpringBoot wird die Komminkation mit der DatenBank inovativer getaltet
+
+SpringBoot1: zeigt eine Typishe Methode , wie Restful Api in SpringBoot umgestzt werden
+
+Bücherei_40: ist eine Büchereimanagementsystem mit GUI
+
+Siehle : ist ein Lagermanagement software mit GUI
+
+sterne: ist ein kleine Ladenmanagement System , das die Typische Core Java Funktionen zeigt
+
+
+hoffe die gefallen euch :-)
