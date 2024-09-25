@@ -1,10 +1,11 @@
-PostgresController : mittels SpringBoot wird die Komminkation mit der DatenBank inovativer getaltet
+RestAbschluss : mittels SpringBoot wird die Komminkation mit der DatenBank inovativer getaltet
 
-RestFul2: zeigt eine Typishe Methode , wie Restful Api in SpringBoot umgestzt werden
+SpringBoot1: zeigt eine Typishe Methode , wie Restful Api in SpringBoot umgestzt werden
 
 Bücherei_40: ist eine Büchereimanagementsystem mit GUI
 
-sterne: ist ein kleine LadenmanagementsSystem , das die Typische Core Java Funktionen zeigt
+Siehle : ist ein Lagermanagement software mit GUI
 
+sterne: ist ein kleine Ladenmanagement System , das die Typische Core Java Funktionen zeigt
 
 hoffe die gefallen euch :-)
